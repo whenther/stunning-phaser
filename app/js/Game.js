@@ -1,6 +1,9 @@
 import {Phaser} from 'phaser';
 import _ from 'lodash';
 
+const STAR_COUNT = 12;
+const STAR_SCORE = 10;
+
 class Game {
   constructor () {
     this.platforms = null;
@@ -9,22 +12,10 @@ class Game {
     this.stars = null;
     this.score = null;
     this.scoreText = null;
-
-    this._collectStar = function (player, star) {
-    	// Removes the star from the screen
-    	 star.kill();
-
-    	//  Add and update the score
-    	this.score += 10;
-    	this.scoreText.text = 'Score: ' + this.score;
-    };
   }
 
-  preload () {
-    this.load.image('sky', 'assets/sky.png');
-    this.load.image('ground', 'assets/platform.png');
-    this.load.image('star', 'assets/star.png');
-    this.load.spritesheet('dude', 'assets/dude.png', 32, 48);
+  init () {
+    this.score = 0;
   }
 
   create () {
@@ -90,7 +81,7 @@ class Game {
   	this.stars.enableBody = true;
 
   	//  Here we'll create 12 of them evenly spaced apart
-    _.forEach(_.range(12), (i) => {
+    _.forEach(_.range(STAR_COUNT), (i) => {
       //  Create a star inside of the 'stars' group
   		let star = this.stars.create(i * 70, 0, 'star');
 
@@ -142,6 +133,20 @@ class Game {
   	 */
     this.physics.arcade.overlap(this.player, this.stars, this._collectStar, null, this);
   }
+
+  /* Private */
+  _collectStar (player, star) {
+    // Removes the star from the screen
+     star.kill();
+
+    //  Add and update the score
+    this.score += STAR_SCORE;
+    this.scoreText.text = 'Score: ' + this.score;
+
+    if (this.score === STAR_SCORE * STAR_COUNT) {
+      this.state.start('GameOver');
+    }
+  };
 }
 
 export default Game;
