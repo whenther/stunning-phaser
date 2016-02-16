@@ -1,0 +1,29 @@
+{
+  "name": "stunning-phaser",
+  "version": "0.0.0",
+  "description": "Playing with Phaser",
+  "main": "app/index.html",
+  "repository": {
+    "type": "git"
+  },
+  "private": true,
+  "jspm": {
+    "directories": {
+      "baseURL": "app"
+    },
+    "dependencies": {
+      "lodash": "npm:lodash@^4.4.0",
+      "phaser": "github:photonstorm/phaser@^2.4.4"
+    },
+    "devDependencies": {
+      "babel": "npm:babel-core@^5.8.24",
+      "babel-runtime": "npm:babel-runtime@^5.8.24",
+      "core-js": "npm:core-js@^1.1.4"
+    }
+  },
+  "devDependencies": {
+    "browser-sync": "^2.11.1",
+    "gulp": "^3.9.1",
+    "jspm": "^0.16.27"
+  }
+}
