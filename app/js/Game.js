@@ -146,7 +146,7 @@ class Game {
     if (this.score === STAR_SCORE * STAR_COUNT) {
       this.state.start('GameOver');
     }
-  };
+  }
 }
 
 export default Game;
